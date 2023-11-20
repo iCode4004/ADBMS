@@ -1,0 +1,81 @@
+emp> show dbs
+
+emp> use mydb
+
+mydb> db.movie.insert({"name":"tutorials point"})
+
+mydb> show dbs
+
+mydb> db.dropDatabase()
+
+mydb> show dbs
+
+mydb> use test
+
+
+test> db.createCollection("mycollection")
+
+test> show collections
+
+emp>
+db.emp_info.insertOne({emp_id:1,emp_name:"ABC",address:"Sangamner",salary:
+50000});
+
+emp> db.emp_info.find();
+
+emp> db.emp_info.find().pretty();
+
+emp> db.emp_info.remove({emp_id:1});
+
+
+
+
+bank>
+db.account.insertMany([{ac_no:1111001,cus_id:"cus001",branch_id:"br001",balance:3
+0000},{ac_no:1111002,cus_id:"cus002",branch_id:"br001",balance:10000},{ac_no:1111
+003,cus_id:"cus003",branch_id:"br002",balance:3000},{ac_no:1111004,cus_id:"cus004
+",branch_id:"br002",balance:5000},{ac_no:1111005,cus_id:"cus005",branch_id:"br003
+",balance:3000},{ac_no:1111006,cus_id:"cus006",branch_id:"br003",balance:5000},{ac
+_no:1111007,cus_id:"cus007",branch_id:"br004",balance:400},{ac_no:1111008,cus_id:"
+cus008",branch_id:"br004",balance:2000}]);
+
+bank> db.customer.find({city:"Nasik"});
+
+bank> db.branch.find({$or:[{city:"pune"},{asset:{$gt:3000}}]});
+
+bank> db.branch.find({assets:{$gt:3000}},{city:"Nasik"});
+
+bank> db.account.find().sort({balance:-1});
+
+bank> db.account.update({balance:{$lt:1000}},{$inc:{balance:3000}});
+
+bank> db.account.find({assets:{$gt:3000,$lt:5000}});
+bank> db.account.find().sort({balance:-1});
+
+bank> db.customer.update({name:"XYZ"},{$set:{city:"Mumbai"}});
+
+bank> db.branch.drop()
+
+
+
+
+
+student> db.stud.ensureIndex({id:1,address:1});
+
+student> db.stud.find().explain("executionStats");
+
+student> db.stud.getIndexes()
+
+student> db.stud.find({address:"Nasik"}).explain("executionStats");
+
+
+student> db.stud1.find();
+
+
+
+> var map =function(){emit(this.std_name,this.sub_marks);};
+> var reduce =function(std_name,sub_marks){return Array.sum(sub_marks);};
+> db.student.mapReduce(map,reduce,{out:'total'});
+
+
+> db.total.find();
